@@ -62,7 +62,7 @@ const resolvers = {
         main: { feels_like, pressure, humidity, temp_min, temp_max, temp },
         name,
         sys: { sunrise, sunset },
-        weather: { description, icon },
+        weather: [{ description, icon }],
         wind: { speed },
       } = currentWeatherData;
 
@@ -72,7 +72,7 @@ const resolvers = {
         description,
         feelsLike: feels_like,
         humidity,
-        icon: icon,
+        icon,
         maxTemp: temp_max,
         minTemp: temp_min,
         pressure,

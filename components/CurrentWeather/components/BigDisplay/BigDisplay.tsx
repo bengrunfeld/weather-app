@@ -1,4 +1,12 @@
-import { Container, Title } from "./BigDisplay.styles";
+import { iconImgUrl } from "../../../../utils/endpoints";
+
+import {
+  Container,
+  Title,
+  Icon,
+  IconAndTemp,
+  TempAndFeel,
+} from "./BigDisplay.styles";
 
 const BigDisplay = ({ weatherData }) => {
   const {
@@ -16,9 +24,14 @@ const BigDisplay = ({ weatherData }) => {
     windSpeed,
   } = weatherData;
 
+  console.log("\n-->> ", weatherData);
+
   return (
     <Container>
-      <Title>Big Display</Title>
+      <IconAndTemp>
+        <Icon src={`${iconImgUrl}/${icon}@2x.png`} />
+        <TempAndFeel></TempAndFeel>
+      </IconAndTemp>
     </Container>
   );
 };
