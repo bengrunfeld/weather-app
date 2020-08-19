@@ -6,6 +6,9 @@ import {
   Icon,
   IconAndTemp,
   TempAndFeel,
+  Temp,
+  Feel,
+  Description,
 } from "./BigDisplay.styles";
 
 const BigDisplay = ({ weatherData }) => {
@@ -21,17 +24,20 @@ const BigDisplay = ({ weatherData }) => {
     pressure,
     sunrise,
     sunset,
+    temp,
     windSpeed,
   } = weatherData;
-
-  console.log("\n-->> ", weatherData);
 
   return (
     <Container>
       <IconAndTemp>
         <Icon src={`${iconImgUrl}/${icon}@2x.png`} />
-        <TempAndFeel></TempAndFeel>
+        <TempAndFeel>
+          <Temp>{temp}&#176;</Temp>
+          <Feel>Feels like: {feelsLike}&#176;</Feel>
+        </TempAndFeel>
       </IconAndTemp>
+      <Description>{description}</Description>
     </Container>
   );
 };
