@@ -1,30 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Weather Forecast
 
-## Getting Started
+## Local Development with Docker
 
-First, run the development server:
+We'll use Docker for local development. Since we're not using databases or external local services that require their own Docker images, this is of limited value currently, but if we choose to add them on, then all the groundwork is there, and we can quickly add them into Docker Compose.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Dependencies
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You need Docker installed to run this app. You can download it [here](https://www.docker.com/get-started)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Installation
 
-## Learn More
+Clone this repo, then run docker compose from the project root.
 
-To learn more about Next.js, take a look at the following resources:
+    docker-compose up -d
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture Decisions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Next.JS
 
-## Deploy on Vercel
+We'll use Next.JS for our front end framework. It wraps around React and gives us Static Rendering and Server Side Rendering if needed, which will be perfect fetching weather data from the API on the server rather than the client.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### GraphQL
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Since there are several pieces of information that we want regarding related data sets, it's a better idea to use GraphQL so that all this can be achieved in one request. Much simpler and easier to read.
+
+### TypeScript
+
+Our data is coming from an external source, and this is where TypeScript really shines. We want to ensure that the incoming data is of a very specific shape so that it doesn't cause bugs in our app.
+
+### Data Flow
+
+[Weather Data Flow](weather-data-flow.png)
+
+When a User navigates to the site, the App makes a request to the local GraphQL API for the data that it needs to
+
+### Geolocation API
+
+We'll use the Geolocation API to find out where the User is based, although they'll need to click "accept" when their browser prompts them. The reason for doing this is that it's far easier than getting them to input their city and then validating it. We will have to handle the situation where they refuse to accept the Geolocation request, though.
+
+## OpenWeatherMap API
+
+### Testing API Endpoints
+
+We can use `curl` to test OpenWeatherMap API endpoints, like so:
+
+    curl https://api.openweathermap.org/data/2.5/weather?lat=31.768318&lon=35.213711&appid=9c5f6ab0d19802f72a11bec902d3ad00
+
+### Current Weather
+
+We'll use the longitude and latitude we got from the Geo API for the OpenWeatherMap Current Weather API call:
+
+    api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={your api key}
+
+### Five Day Forecast
+
+We'll also use them for the five day forecast API call:
+
+    api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
+
+### Relevant Documentation
+
+Here are links to the relevant API documentation:
+
+-   https://openweathermap.org/current
+-   https://openweathermap.org/forecast5
+-   https://openweathermap.org/weather-conditions
+
+## Typeography
+
+We'll use Google fonts:
+
+-   Alata
+-   Roboto
+
+## Design
+
+Our design is loosely based off of Accuweather.com. Kudos to their design team.
+
+## Secrets
+
+Because this is a non-production app, managing secrets becomes a little tricky, since we don't want to go to all the trouble of using a Docker or Vercel secrets service. So we will store them as environment variables, with the understanding that if this became a production app, we'd store them much more securely.
