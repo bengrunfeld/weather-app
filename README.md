@@ -28,6 +28,12 @@ Since there are several pieces of information that we want regarding related dat
 
 Our data is coming from an external source, and this is where TypeScript really shines. We want to ensure that the incoming data is of a very specific shape so that it doesn't cause bugs in our app.
 
+### Styled Components
+
+We want our code to be as semantic as possible, so that others can read it easily. Styled Components helps us achieve this in the best possible way. In my opinion `<LocalWeatherTemp />` is much more readable than:
+
+    <div class="local-weather-temp weather-detail">{data}</div>
+
 ### Data Flow
 
 [Weather Data Flow](weather-data-flow.png)
@@ -73,6 +79,11 @@ We'll use Google fonts:
 -   Alata
 -   Roboto
 
+The should be called like so:
+
+    font-family: 'Alata', sans-serif;
+    font-family: 'Roboto', sans-serif;
+
 ## Design
 
 Our design is loosely based off of Accuweather.com. Kudos to their design team.
@@ -80,3 +91,7 @@ Our design is loosely based off of Accuweather.com. Kudos to their design team.
 ## Secrets
 
 Because this is a non-production app, managing secrets becomes a little tricky, since we don't want to go to all the trouble of using a Docker or Vercel secrets service. So we will store them as environment variables, with the understanding that if this became a production app, we'd store them much more securely.
+
+## Navigation
+
+We want really fast page loads. Because we only have one other page, pre-fetching its data will not overburden the system, so we'll use Next.JS' `link` component to acheive that.
