@@ -10,9 +10,9 @@ You need Docker installed to run this app. You can download it [here](https://ww
 
 ## Installation
 
-Clone this repo, then run docker compose from the project root.
+Clone this repo, then run `docker-compose` from the project root.
 
-    docker-compose up -d
+    docker-compose up
 
 ## Architecture Decisions
 

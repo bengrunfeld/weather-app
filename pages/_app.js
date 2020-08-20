@@ -3,7 +3,7 @@ import App from "next/app";
 import { ThemeProvider } from "styled-components";
 
 import { theme } from "../theme";
-import "../styles/globals.css";
+import "../theme/globals.css";
 
 export default class MyApp extends App {
   render() {
