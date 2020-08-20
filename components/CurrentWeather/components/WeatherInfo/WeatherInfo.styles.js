@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   background: ${({ theme }) => theme.colors.lightGray};
-`;
 
-export const Title = styled.h1``;
+  @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
+    flex-direction: row;
+  }
+`;

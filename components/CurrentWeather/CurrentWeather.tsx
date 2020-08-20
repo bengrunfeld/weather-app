@@ -2,9 +2,14 @@ import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-import { Well, PageTitle } from "../";
-import { WeatherInfo } from "./components";
-import { Container, Title } from "./CurrentWeather.styles";
+import { Well, PageTitle, NavLink } from "../";
+import { WeatherInfo, MaxMinTemp } from "./components";
+import {
+  Container,
+  Title,
+  MinMaxContainer,
+  TempContainer,
+} from "./CurrentWeather.styles";
 
 interface CurrentWeather {
   id: ID;
@@ -57,8 +62,18 @@ const CurrentWeather = ({ location }) => {
 
   return (
     <Container>
+      <NavLink href="/five-day-forecast">Five Day Forecast</NavLink>
       <PageTitle city={data.currentWeather.city}>Current Weather</PageTitle>
       <WeatherInfo weatherData={data.currentWeather} />
+      <MinMaxContainer>
+        <TempContainer>
+          <MaxMinTemp temp={data.currentWeather.maxTemp}>Max</MaxMinTemp>
+        </TempContainer>
+
+        <TempContainer>
+          <MaxMinTemp temp={data.currentWeather.minTemp}>Min</MaxMinTemp>
+        </TempContainer>
+      </MinMaxContainer>
     </Container>
   );
 };

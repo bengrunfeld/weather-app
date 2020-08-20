@@ -2,6 +2,7 @@ const theme = {
   colors: {
     black: "#000",
     white: "#fff",
+    blue: "#0000FF",
     darkBlue: "#000080",
     darkRed: "#8b0000",
     lightRed: "#ffcccb",
@@ -9,6 +10,14 @@ const theme = {
     lightGreen: "#00FF00",
     darkGray: "#3e3e3e",
     lightGray: "#e3e3e3",
+  },
+  size: {
+    tablet: "768px",
+    desktop: "1024px",
+    pageWidth: "918px",
+    blurbWidth: "763px",
+    articleWidth: "789px",
+    table: "950px",
   },
 };
 

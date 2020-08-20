@@ -55,8 +55,6 @@ const resolvers = {
     currentWeather: async (parent, args): Promise<Array<CurrentWeather>> => {
       const currentWeatherData = await getCurrentWeather(args);
 
-      console.log(currentWeatherData);
-
       const {
         coord,
         main: { feels_like, pressure, humidity, temp_min, temp_max, temp },

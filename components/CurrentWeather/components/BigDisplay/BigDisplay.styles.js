@@ -1,15 +1,35 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  border-right: 0.2rem solid ${({ theme }) => theme.colors.darkGray};
+  padding-bottom: 3rem;
+
+  border-bottom: 0.2rem solid ${({ theme }) => theme.colors.darkGray};
+
+  @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
+    border-right: 0.2rem solid ${({ theme }) => theme.colors.darkGray};
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 `;
 
 export const Title = styled.h1``;
 
-export const Icon = styled.img`
+export const IconContainer = styled.div`
   width: 14rem;
   height: 14rem;
+`;
+
+export const Icon = styled.img`
+  width: 10rem;
+  height: 12rem;
   object-fit: cover;
+
+  @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
+    width: 14rem;
+    height: 14rem;
+  }
 `;
 
 export const IconAndTemp = styled.div`
@@ -17,7 +37,11 @@ export const IconAndTemp = styled.div`
   justify-content: space-between;
 
   > :last-child {
-    padding-right: 2rem;
+    padding-right: 0;
+
+    @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
+      padding-right: 2rem;
+    }
   }
 `;
 export const TempAndFeel = styled.div`
@@ -40,5 +64,5 @@ export const Feel = styled.p`
 
 export const Description = styled.p`
   font-size: 1.8rem;
-  padding-left: 4rem;
+  padding-left: 1rem;
 `;

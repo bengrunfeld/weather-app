@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const TitleContainer = styled.div`
   background: ${({ theme }) => theme.colors.lightGray};
+
+  > * {
+    padding: 1rem 0;
+  }
 `;
 
 export const Title = styled.h1`

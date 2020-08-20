@@ -9,35 +9,24 @@ import {
   Temp,
   Feel,
   Description,
+  IconContainer,
 } from "./BigDisplay.styles";
 
 const BigDisplay = ({ weatherData }) => {
-  const {
-    city,
-    coords,
-    description,
-    feelsLike,
-    humidity,
-    icon,
-    maxTemp,
-    minTemp,
-    pressure,
-    sunrise,
-    sunset,
-    temp,
-    windSpeed,
-  } = weatherData;
+  const { description, feelsLike, icon, temp } = weatherData;
 
   return (
     <Container>
       <IconAndTemp>
-        <Icon src={`${iconImgUrl}/${icon}@2x.png`} />
+        <IconContainer>
+          <Icon src={`${iconImgUrl}/${icon}@2x.png`} />
+        </IconContainer>
         <TempAndFeel>
           <Temp>{temp}&#176;</Temp>
           <Feel>Feels like: {feelsLike}&#176;</Feel>
         </TempAndFeel>
       </IconAndTemp>
-      <Description>{description}</Description>
+      <Description>Conditions: {description}</Description>
     </Container>
   );
 };
