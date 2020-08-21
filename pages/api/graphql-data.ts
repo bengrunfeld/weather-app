@@ -1,19 +1,12 @@
 import { ApolloServer, gql } from "apollo-server-micro";
-import fetch from "isomorphic-unfetch";
 import { CurrentWeather, ForecastWeather } from "../../utils/types";
 import { baseApiUrl } from "../../utils/endpoints";
+import { fetchWeatherData } from "../../utils/fetchWeatherData";
 
-const getCurrentWeather = async args => {
-  const API_KEY = process.env.API_KEY;
-  const url = `${baseApiUrl}/weather?lat=${args.lat}&lon=${args.long}&units=imperial&appid=${API_KEY}`;
+const getCurrentWeather = async args => await fetchWeatherData(args, "weather");
 
-  const data = await fetch(url);
-  const parsedData = await data.json();
-
-  return parsedData;
-};
-
-const getFiveDayForecast = async () => {};
+const getFiveDayForecast = async args =>
+  await fetchWeatherData(args, "onecall", "current,hourly,minutely");
 
 const typeDefs = gql`
   type Coords {
@@ -37,16 +30,49 @@ const typeDefs = gql`
     windSpeed: Float
   }
 
-  type ForecastWeather {
-    date: String
-    minTemp: Float
-    maxTemp: Float
+  type Temp {
+    day: Float
+    min: Float
+    max: Float
+    night: Float
+    eve: Float
+    morn: Float
+  }
+
+  type Weather {
+    id: Int
+    main: String
+    description: String
     icon: String
+  }
+
+  type Daily {
+    dt: Int
+    sunrise: Int
+    sunset: Int
+    temp: Temp
+    feels_like: Temp
+    pressure: Float
+    humidity: Float
+    dew_point: Float
+    wind_speed: Float
+    wind_deg: Float
+    weather: [Weather]
+    clouds: Int
+    pop: Int
+    uvi: Float
+  }
+
+  type ForecastWeather {
+    lat: Float
+    lon: Float
+    timezone: String
+    daily: [Daily]
   }
 
   type Query {
     currentWeather(long: Float!, lat: Float!): CurrentWeather
-    fiveDayForecast: [ForecastWeather]
+    fiveDayForecast(long: Float!, lat: Float!): ForecastWeather
   }
 `;
 
@@ -81,8 +107,19 @@ const resolvers = {
       };
     },
 
-    fiveDayForecast: async (parent, args): Promise<Array<ForecastWeather>> =>
-      await getFiveDayForecast(),
+    // fiveDayForecast: async (parent, args): Promise<Array<ForecastWeather>> => {
+    fiveDayForecast: async (parent, args) => {
+      const weatherForecast = await getFiveDayForecast(args);
+
+      const { lat, lon, timezone, daily } = weatherForecast;
+
+      return {
+        lat,
+        lon,
+        timezone,
+        daily,
+      };
+    },
   },
 };
 
