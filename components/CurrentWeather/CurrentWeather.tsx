@@ -11,9 +11,25 @@ import {
   TempContainer,
 } from "./CurrentWeather.styles";
 
+interface Coords {
+  lon: number;
+  lat: number;
+}
+
 interface CurrentWeather {
-  id: ID;
-  city: String;
+  city: string;
+  coords: Coords;
+  description: string;
+  feelsLike: number;
+  humidity: number;
+  icon: string;
+  maxTemp: number;
+  minTemp: number;
+  pressure: number;
+  sunrise: number;
+  sunset: number;
+  temp: number;
+  windSpeed: number;
 }
 
 const GET_CURRENT_WEATHER = gql`
@@ -42,10 +58,9 @@ const GET_CURRENT_WEATHER = gql`
 const CurrentWeather = ({ location }) => {
   const { long, lat } = location;
 
-  const [
-    getCurrentWeather,
-    { called, loading, error, data },
-  ] = useLazyQuery(GET_CURRENT_WEATHER, { variables: { long, lat } });
+  const [getCurrentWeather, { called, loading, error, data }] = useLazyQuery<
+    CurrentWeather
+  >(GET_CURRENT_WEATHER, { variables: { long, lat } });
 
   useEffect(() => {
     getCurrentWeather();
@@ -67,11 +82,15 @@ const CurrentWeather = ({ location }) => {
       <WeatherInfo weatherData={data.currentWeather} />
       <MinMaxContainer>
         <TempContainer>
-          <MaxMinTemp temp={data.currentWeather.maxTemp}>Max</MaxMinTemp>
+          <MaxMinTemp temp={data.currentWeather.maxTemp} type="max">
+            Max
+          </MaxMinTemp>
         </TempContainer>
 
         <TempContainer>
-          <MaxMinTemp temp={data.currentWeather.minTemp}>Min</MaxMinTemp>
+          <MaxMinTemp temp={data.currentWeather.minTemp} type="min">
+            Min
+          </MaxMinTemp>
         </TempContainer>
       </MinMaxContainer>
     </Container>

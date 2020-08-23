@@ -11,6 +11,8 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    width: 55%;
+    padding-right: 2rem;
   }
 `;
 
@@ -27,7 +29,7 @@ export const Icon = styled.img`
   object-fit: cover;
 
   @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
-    width: 14rem;
+    width: 12rem;
     height: 14rem;
   }
 `;
@@ -35,14 +37,6 @@ export const Icon = styled.img`
 export const IconAndTemp = styled.div`
   display: flex;
   justify-content: space-between;
-
-  > :last-child {
-    padding-right: 0;
-
-    @media screen and (min-width: ${({ theme }) => theme.size.desktop}) {
-      padding-right: 2rem;
-    }
-  }
 `;
 export const TempAndFeel = styled.div`
   display: flex;
@@ -59,7 +53,7 @@ export const Temp = styled.p`
 `;
 
 export const Feel = styled.p`
-  font-size: 2rem;
+  font-size: 1.6rem;
 `;
 
 export const Description = styled.p`

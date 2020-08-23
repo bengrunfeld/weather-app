@@ -1,9 +1,12 @@
-import { Container, Title, Temp } from "./MaxMinTemp.styles";
+import { Container, Title, Temp, Icon, TempInfo } from "./MaxMinTemp.styles";
 
-const MaxMinTemp = ({ temp, children }) => (
+const MaxMinTemp = ({ temp, children, type }) => (
   <Container>
-    <Title>{children}</Title>
-    <Temp>{temp}&#176;</Temp>
+    <Icon type={type} />
+    <TempInfo>
+      <Title>{children}</Title>
+      <Temp>{temp}&#176;</Temp>
+    </TempInfo>
   </Container>
 );
 
