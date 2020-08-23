@@ -29,6 +29,15 @@ const GET_FIVE_DAY_FORECAST = gql`
       timezone
       daily {
         dt
+        temp {
+          day
+          min
+          max
+        }
+        weather {
+          icon
+          description
+        }
       }
     }
   }
@@ -55,15 +64,13 @@ const ForeCast = ({ location }) => {
       </Container>
     );
 
-  console.log(data);
-
   return (
     <Container>
       <NavLink href="/">Current Weather</NavLink>
       <PageTitle city={data.fiveDayForecast.timezone}>
         Five Day Forecast
       </PageTitle>
-      <ForeCastList forecastData={data.fiveDayForecast} />
+      <ForeCastList dailyData={data.fiveDayForecast.daily} />
     </Container>
   );
 };

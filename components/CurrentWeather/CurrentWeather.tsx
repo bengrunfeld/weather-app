@@ -82,11 +82,15 @@ const CurrentWeather = ({ location }) => {
       <WeatherInfo weatherData={data.currentWeather} />
       <MinMaxContainer>
         <TempContainer>
-          <MaxMinTemp temp={data.currentWeather.maxTemp}>Max</MaxMinTemp>
+          <MaxMinTemp temp={data.currentWeather.maxTemp} type="max">
+            Max
+          </MaxMinTemp>
         </TempContainer>
 
         <TempContainer>
-          <MaxMinTemp temp={data.currentWeather.minTemp}>Min</MaxMinTemp>
+          <MaxMinTemp temp={data.currentWeather.minTemp} type="min">
+            Min
+          </MaxMinTemp>
         </TempContainer>
       </MinMaxContainer>
     </Container>

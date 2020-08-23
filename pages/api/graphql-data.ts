@@ -5,7 +5,7 @@ import { fetchWeatherData } from "../../utils/fetchWeatherData";
 
 const getCurrentWeather = async args => await fetchWeatherData(args, "weather");
 
-const getFiveDayForecast = async args =>
+const getForecast = async args =>
   await fetchWeatherData(args, "onecall", "current,hourly,minutely");
 
 const typeDefs = gql`
@@ -109,7 +109,7 @@ const resolvers = {
 
     // fiveDayForecast: async (parent, args): Promise<Array<ForecastWeather>> => {
     fiveDayForecast: async (parent, args) => {
-      const weatherForecast = await getFiveDayForecast(args);
+      const weatherForecast = await getForecast(args);
 
       const { lat, lon, timezone, daily } = weatherForecast;
 
