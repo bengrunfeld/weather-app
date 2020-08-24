@@ -1,2 +1,3 @@
-export { CurrentWeather } from "./CurrentWeather";
-export { ForecastWeather } from "./ForecastWeather";
+export { CurrentWeatherType } from "./CurrentWeatherType";
+export { ForecastWeatherType } from "./ForecastWeatherType";
+export { WeatherApiType } from "./WeatherApiType";

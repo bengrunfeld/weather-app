@@ -30,7 +30,11 @@ export const Temp = styled.p`
   font-family: "Roboto", sans-serif;
 `;
 
-export const Icon = styled.div`
+interface IconProps {
+  type: string;
+}
+
+export const Icon = styled.div<IconProps>`
   width: 0;
   height: 0;
   border-left: 30px solid transparent;

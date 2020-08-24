@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 
 import { Well, PageTitle, NavLink } from "../";
 import { ForeCastList } from "./components";

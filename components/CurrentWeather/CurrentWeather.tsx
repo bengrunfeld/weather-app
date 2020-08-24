@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 
 import { Well, PageTitle, NavLink } from "../";
 import { WeatherInfo, MaxMinTemp } from "./components";
@@ -16,7 +16,7 @@ interface Coords {
   lat: number;
 }
 
-interface CurrentWeather {
+interface Weather {
   city: string;
   coords: Coords;
   description: string;
@@ -30,6 +30,10 @@ interface CurrentWeather {
   sunset: number;
   temp: number;
   windSpeed: number;
+}
+
+interface CurrentWeatherType {
+  currentWeather: Weather;
 }
 
 const GET_CURRENT_WEATHER = gql`
@@ -59,7 +63,7 @@ const CurrentWeather = ({ location }) => {
   const { long, lat } = location;
 
   const [getCurrentWeather, { called, loading, error, data }] = useLazyQuery<
-    CurrentWeather
+    CurrentWeatherType
   >(GET_CURRENT_WEATHER, { variables: { long, lat } });
 
   useEffect(() => {

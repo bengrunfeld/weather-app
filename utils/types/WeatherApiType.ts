@@ -1,18 +1,11 @@
-import {
-  Coord,
-  Weather,
-  WeatherArr,
-  Main,
-  Wind,
-  Clouds,
-  Sys,
-} from "./CommonTypes";
+import { Coord, Clouds, Weather, Main, Wind, Sys } from "./CommonTypes";
 
-export interface CurrentWeather {
+export interface WeatherApiType {
   coord: Coord;
-  weather: Weather;
+  weather: Weather[];
   base: string;
   main: Main;
+  visibility: number;
   wind: Wind;
   clouds: Clouds;
   dt: number;

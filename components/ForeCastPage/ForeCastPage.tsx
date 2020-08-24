@@ -3,7 +3,12 @@ import { CurrentWeather, Well, TitleBar, ForeCast } from "../";
 import { PageLayout, Title } from "./ForeCastPage.styles";
 
 const ForeCastPage = () => {
-  const [location, setLocation] = useState();
+  interface Location {
+    long: number;
+    lat: number;
+  }
+
+  const [location, setLocation] = useState<Location>();
   const [geoApiExists, setGeoApiExists] = useState(true);
   const [geoPermission, setGeoPermission] = useState(true);
 
