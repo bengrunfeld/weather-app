@@ -1,9 +1,14 @@
 import { ApolloServer, gql } from "apollo-server-micro";
-import { CurrentWeather, ForecastWeather } from "../../utils/types";
+import {
+  CurrentWeatherType,
+  ForecastWeatherType,
+  WeatherApiType,
+} from "../../utils/types";
 import { baseApiUrl } from "../../utils/endpoints";
 import { fetchWeatherData } from "../../utils/fetchWeatherData";
 
-const getCurrentWeather = async args => await fetchWeatherData(args, "weather");
+const getCurrentWeather = async (args): Promise<WeatherApiType> =>
+  await fetchWeatherData(args, "weather");
 
 const getForecast = async args =>
   await fetchWeatherData(args, "onecall", "current,hourly,minutely");
@@ -78,7 +83,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    currentWeather: async (parent, args): Promise<Array<CurrentWeather>> => {
+    currentWeather: async (parent, args): Promise<CurrentWeatherType> => {
       const currentWeatherData = await getCurrentWeather(args);
 
       const {
@@ -107,8 +112,7 @@ const resolvers = {
       };
     },
 
-    // fiveDayForecast: async (parent, args): Promise<Array<ForecastWeather>> => {
-    fiveDayForecast: async (parent, args) => {
+    fiveDayForecast: async (parent, args): Promise<ForecastWeatherType> => {
       const weatherForecast = await getForecast(args);
 
       const { lat, lon, timezone, daily } = weatherForecast;

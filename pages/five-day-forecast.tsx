@@ -1,5 +1,5 @@
 import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient, { gql } from "apollo-boost";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { ForeCastPage } from "../components";
 
 const Home = ({ data, host, protocol }) => {
@@ -7,6 +7,7 @@ const Home = ({ data, host, protocol }) => {
 
   const client = new ApolloClient({
     uri,
+    cache: new InMemoryCache(),
   });
 
   return (

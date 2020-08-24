@@ -1,6 +1,6 @@
 import { BigDisplay, GranularDisplay } from "../";
 
-import { Container, MinMaxContainer } from "./WeatherInfo.styles";
+import { Container } from "./WeatherInfo.styles";
 
 const WeatherInfo = ({ weatherData }) => (
   <Container>

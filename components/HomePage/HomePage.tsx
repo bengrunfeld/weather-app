@@ -3,7 +3,12 @@ import { CurrentWeather, Well, TitleBar } from "../";
 import { PageLayout, Title } from "./HomePage.styles";
 
 const HomePage = () => {
-  const [location, setLocation] = useState();
+  interface Location {
+    long: number;
+    lat: number;
+  }
+
+  const [location, setLocation] = useState<Location>();
   const [geoApiExists, setGeoApiExists] = useState(true);
   const [geoPermission, setGeoPermission] = useState(true);
 

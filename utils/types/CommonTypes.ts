@@ -3,6 +3,32 @@ export interface Coord {
   lat: number;
 }
 
+export interface Temp {
+  day: number;
+  min: number;
+  max: number;
+  night: number;
+  eve: number;
+  morn: number;
+}
+
+export interface Daily {
+  dt: number;
+  sunrise: number;
+  sunset: number;
+  temp: Temp;
+  feels_like: Temp;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  wind_speed: number;
+  wind_deg: number;
+  weather: Array<Weather>;
+  clouds: number;
+  pop: number;
+  uvi: number;
+}
+
 export interface Weather {
   id: number;
   main: string;
@@ -11,7 +37,7 @@ export interface Weather {
 }
 
 export interface WeatherArr {
-  weather: [Weather];
+  weather: Weather[];
 }
 
 export interface Main {
