@@ -7,7 +7,7 @@ import { FAHRENHEIT } from "../utils/constants";
 import { theme } from "../theme";
 import "../theme/globals.css";
 
-export const UnitContext = createContext(FAHRENHEIT);
+export const UnitContext = createContext();
 
 const SubComponent = ({ children }) => {
   const [unit, setUnit] = useState(FAHRENHEIT);

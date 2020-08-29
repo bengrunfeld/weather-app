@@ -2,7 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div``;
 
-export const Unit = styled.a`
+interface UnitType {
+  nonActive: boolean;
+}
+
+export const Unit = styled.a<UnitType>`
   font-size: 4rem;
   padding: 0.5rem;
   user-select: none;
