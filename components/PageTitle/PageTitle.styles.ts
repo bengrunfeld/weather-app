@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
-export const TitleContainer = styled.div`
+export const Container = styled.div`
   background: ${({ theme }) => theme.colors.lightGray};
+  display: flex;
+  justify-content: space-between;
 
   > * {
     padding: 1rem 0;
@@ -18,3 +20,5 @@ export const SubTitle = styled.h3`
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
 `;
+
+export const LeftSide = styled.div``;

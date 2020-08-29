@@ -23,7 +23,7 @@ const typeDefs = gql`
     city: String
     coords: Coords
     description: String
-    feelsLike: String
+    feelsLike: Float
     humidity: Int
     icon: String
     maxTemp: Float

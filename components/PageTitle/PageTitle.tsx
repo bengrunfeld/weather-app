@@ -1,10 +1,15 @@
-import { TitleContainer, SubTitle, Title } from "./PageTitle.styles";
+import { UnitPicker } from "../";
+
+import { LeftSide, SubTitle, Title, Container } from "./PageTitle.styles";
 
 const PageTitle = ({ city, children }) => (
-  <TitleContainer>
-    <Title>{children}</Title>
-    <SubTitle>For: {city}</SubTitle>
-  </TitleContainer>
+  <Container>
+    <LeftSide>
+      <Title>{children}</Title>
+      <SubTitle>For: {city}</SubTitle>
+    </LeftSide>
+    <UnitPicker />
+  </Container>
 );
 
 export default PageTitle;

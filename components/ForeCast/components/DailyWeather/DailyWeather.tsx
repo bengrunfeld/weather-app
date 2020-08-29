@@ -25,11 +25,11 @@ const DailyWeather = ({ weatherData }) => {
       </IconContainer>
       <HiLo>
         <Title>Hi:</Title>
-        <Temp>{max}&#176;</Temp>
+        <Temp>{max.toFixed(1)}&#176;</Temp>
       </HiLo>
       <HiLo>
         <Title>Low:</Title>
-        <Temp>{min}&#176;</Temp>
+        <Temp>{min.toFixed(1)}&#176;</Temp>
       </HiLo>
       <Description>{description}</Description>
     </Container>
