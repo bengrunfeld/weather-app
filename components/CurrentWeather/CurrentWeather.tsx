@@ -1,6 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "@apollo/client";
+
+import { UnitContext } from "../../pages/_app";
+
+import toCelsius from "../../utils/toCelsius";
+import { FAHRENHEIT } from "../../utils/constants";
 
 import { Well, PageTitle, NavLink } from "../";
 import { WeatherInfo, MaxMinTemp } from "./components";
@@ -59,12 +64,49 @@ const GET_CURRENT_WEATHER = gql`
   }
 `;
 
+const convertToCelsius = data => {
+  const {
+    currentWeather: {
+      city,
+      coords,
+      description,
+      feelsLike,
+      humidity,
+      icon,
+      pressure,
+      sunrise,
+      sunset,
+      windSpeed,
+    },
+  } = data;
+
+  const celsiusObj = {
+    city,
+    coords,
+    description,
+    feelsLike: toCelsius(data.currentWeather.feelsLike),
+    humidity,
+    icon,
+    maxTemp: toCelsius(data.currentWeather.maxTemp),
+    minTemp: toCelsius(data.currentWeather.minTemp),
+    pressure,
+    sunrise,
+    sunset,
+    temp: toCelsius(data.currentWeather.temp),
+    windSpeed,
+  };
+
+  return { currentWeather: celsiusObj };
+};
+
 const CurrentWeather = ({ location }) => {
   const { long, lat } = location;
 
   const [getCurrentWeather, { called, loading, error, data }] = useLazyQuery<
     CurrentWeatherType
   >(GET_CURRENT_WEATHER, { variables: { long, lat } });
+
+  const { unit } = useContext(UnitContext);
 
   useEffect(() => {
     getCurrentWeather();
@@ -79,20 +121,22 @@ const CurrentWeather = ({ location }) => {
       </Container>
     );
 
+  const dataObj = unit === FAHRENHEIT ? data : convertToCelsius(data);
+
   return (
     <Container>
       <NavLink href="/five-day-forecast">Five Day Forecast</NavLink>
-      <PageTitle city={data.currentWeather.city}>Current Weather</PageTitle>
-      <WeatherInfo weatherData={data.currentWeather} />
+      <PageTitle city={dataObj.currentWeather.city}>Current Weather</PageTitle>
+      <WeatherInfo weatherData={dataObj.currentWeather} />
       <MinMaxContainer>
         <TempContainer>
-          <MaxMinTemp temp={data.currentWeather.maxTemp} type="max">
+          <MaxMinTemp temp={dataObj.currentWeather.maxTemp} type="max">
             Max
           </MaxMinTemp>
         </TempContainer>
 
         <TempContainer>
-          <MaxMinTemp temp={data.currentWeather.minTemp} type="min">
+          <MaxMinTemp temp={dataObj.currentWeather.minTemp} type="min">
             Min
           </MaxMinTemp>
         </TempContainer>

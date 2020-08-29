@@ -22,8 +22,8 @@ const BigDisplay = ({ weatherData }) => {
           <Icon src={`${iconImgUrl}/${icon}@2x.png`} />
         </IconContainer>
         <TempAndFeel>
-          <Temp>{temp}&#176;</Temp>
-          <Feel>Feels like: {feelsLike}&#176;</Feel>
+          <Temp>{temp.toFixed(1)}&#176;</Temp>
+          <Feel>Feels like: {feelsLike.toFixed(1)}&#176;</Feel>
         </TempAndFeel>
       </IconAndTemp>
       <Description>Conditions: {description}</Description>

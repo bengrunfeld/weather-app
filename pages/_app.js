@@ -1,9 +1,23 @@
+import { createContext, useState } from "react";
 import Head from "next/head";
 import App from "next/app";
 import { ThemeProvider } from "styled-components";
+import { FAHRENHEIT } from "../utils/constants";
 
 import { theme } from "../theme";
 import "../theme/globals.css";
+
+export const UnitContext = createContext();
+
+const SubComponent = ({ children }) => {
+  const [unit, setUnit] = useState(FAHRENHEIT);
+
+  return (
+    <UnitContext.Provider value={{ unit, updateUnit: setUnit }}>
+      {children}
+    </UnitContext.Provider>
+  );
+};
 
 export default class MyApp extends App {
   render() {
@@ -23,7 +37,9 @@ export default class MyApp extends App {
         </Head>
 
         <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
+          <SubComponent>
+            <Component {...pageProps} />
+          </SubComponent>
         </ThemeProvider>
       </>
     );
